@@ -1,0 +1,26 @@
+" General vim configuration without plugins
+" Plugins are installed in home.nix
+
+filetype plugin indent on
+syntax on
+
+
+" Tab width = 4
+set tabstop=4
+" Make < and > indent by 4 columns
+set shiftwidth=4
+" Replace tabs with spaces
+set expandtab
+" Line numbers
+set number
+" yank/delete to system clipboard
+set clipboard=unnamedplus
+" color columns 80 and 100 to provide a line length marker
+" (text on the colored lines is still within bounds)
+set colorcolumn=80,100
+
+highlight ColorColumn ctermbg=8 guibg=lightgrey
+
+" make tabs and trailing whitespace visible
+set list listchars=tab:»·,trail:·
+
