@@ -101,6 +101,17 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
+  # PostgreSQL database for development
+  services.postgresql = {
+    enable = true;
+    # We trust anything connecting to localhost or via the Unix socket.
+    authentication = pkgs.lib.mkForce ''
+      local all all              trust
+      host  all all 127.0.0.1/32 trust
+      host  all all ::1/128      trust
+    '';
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jonas = {
     isNormalUser = true;
