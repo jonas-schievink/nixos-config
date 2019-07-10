@@ -9,6 +9,16 @@
   # TODO: on boot/login: amixer -c0 sset 'Headphone Mic Boost' 10dB
   # (gets rid of white noise on headphone output)
 
+  # XXX KDE:
+  # Display and Monitor
+  # * Rendering backend: OpenGL 3.1
+  # * Animation speed: Instant
+  # Startup and Shutdown -> Desktop Session
+  # * check "Start with an empty session"
+  # * uncheck "Confirm logout"
+  # Features:
+  # * Popup when plugging in ext. display
+
   services.syncthing.enable = true;
 
   services.unclutter = {
@@ -36,7 +46,7 @@
     allowBold = true;
     audibleBell = false;
     cursorBlink = "off";
-    backgroundColor = "rgba(0x00, 0x2b, 0x36, 0.60)";
+    backgroundColor = "#002b36";
     scrollbackLines = 10000;
   };
 
@@ -83,8 +93,8 @@
     '';
   };
 
-  # FIXME: FF extensions aren't currently packaged in Nix/home-manager, but at
-  # least they can be synced automatically.
+  # FF extensions aren't currently packaged in Nix/home-manager, but they can
+  # be synced automatically.
   programs.firefox.enable = true;
 
   programs.neovim = {
