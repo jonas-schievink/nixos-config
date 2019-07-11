@@ -93,6 +93,9 @@
     '';
   };
 
+  # Install direnv and hook into shells.
+  programs.direnv.enable = true;
+
   # FF extensions aren't currently packaged in Nix/home-manager, but they can
   # be synced automatically.
   programs.firefox.enable = true;
