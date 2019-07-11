@@ -34,6 +34,45 @@
     imageDirectory = toString ~/share/pictures/bgs;
   };
 
+  # custom systemd units/services/sockets/etc:
+
+  systemd.user.sockets.lorri = {
+    Unit = {
+      Description = "lorri build daemon";
+    };
+
+    Socket = {
+      ListenStream = "%t/lorri/daemon.socket";
+    };
+
+    Install = {
+      WantedBy = [ "sockets.target" ];
+    };
+  };
+
+  systemd.user.services.lorri = {
+    Unit = {
+      Description = "lorri build daemon";
+      Documentation = "https://github.com/target/lorri";
+      ConditionUser = "!@system";
+      Requires = "lorri.socket";
+      Wants = "lorri.socket";
+      RefuseManualStart = true;
+    };
+    Service = {
+      ExecStart = "${pkgs.lorri}/bin/lorri daemon";
+      PrivateTmp = true;
+      ProtectSystem = "strict";
+      WorkingDirectory = "%h";
+      Restart = "on-failure";
+      # Lorri needs Nix in its PATH
+      Environment = ''
+        PATH=${pkgs.nix}/bin
+        RUST_BACKTRACE=1
+      '';
+    };
+  };
+
 
   # configurable programs:
 
