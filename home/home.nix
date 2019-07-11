@@ -133,6 +133,10 @@
       "*.autosave"
       ".vscode"
       "__pycache__/"
+
+      # Avoid the "i use nix btw" starter pack
+      ".envrc"
+      "shell.nix"
     ];
     aliases = {
       squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"\${1:-A new start}\");};f";
