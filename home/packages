@@ -21,7 +21,6 @@ cargo-fuzz
 cargo-release
 cargo-tree
 cargo-update
-weechat
 xdg-user-dirs
 jetbrains.idea-community
 openocd
