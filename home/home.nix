@@ -62,7 +62,6 @@
 
   # TODO: `man` completion is broken
 
-  # TODO: path segment shortening
   programs.fish = {  # TODO: prompt (omf?)
     # https://github.com/oh-my-fish/theme-gitstatus
     # https://github.com/Jomik/dotfiles/tree/d8daa5f1c7c2aa56ea604b63d9a421fe77ff0816/.config/nixpkgs/programs/fish
@@ -87,14 +86,26 @@
       dmesg = "dmesg --color=always";
       cp = "cp --reflink=auto";
     };
+    # The default direnv hook uses the `fish_prompt` event. The `fish_preexec`
+    # event is better, since using Alt+Left/Right doesn't fire the prompt
+    # event.
+    # Ironically this also fires when the command is empty, so it's basically
+    # a superset of `fish_prompt`.
+    interactiveShellInit = ''
+      function __direnv_export_eval --on-event fish_preexec;
+        eval ("${pkgs.direnv}/bin/direnv" export fish);
+      end
+    '';
     shellInit = ''
       set fish_greeting  # disable greeting
       set fish_prompt_pwd_dir_length 0
     '';
   };
 
-  # Install direnv and hook into shells.
+  # Enable direnv...
   programs.direnv.enable = true;
+  # ...we have our own integration though
+  programs.direnv.enableFishIntegration = false;
 
   # FF extensions aren't currently packaged in Nix/home-manager, but they can
   # be synced automatically.
