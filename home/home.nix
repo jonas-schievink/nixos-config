@@ -99,6 +99,8 @@
     meters.right = [ "Memory" "Swap" "Blank" "Tasks" "LoadAverage" "Battery" "Clock" ];
   };
 
+  programs.bat.enable = true;
+
   # TODO: `man` completion is broken
 
   programs.fish = {  # TODO: prompt (omf?)
