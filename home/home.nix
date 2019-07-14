@@ -282,6 +282,11 @@
     root = "${toString ~/.}"
   '';
 
+  home.file.".config/nix/nix.conf".text = ''
+    # Cache downloaded source archives for ~a month
+    tarball-ttl = 2630000
+  '';
+
   home.file.".config/mpv/mpv.conf".text = ''
     hwdec=vaapi
     vo=gpu
