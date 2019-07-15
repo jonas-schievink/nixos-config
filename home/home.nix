@@ -299,13 +299,15 @@
     executable = true;
     text = "source $HOME/.setenv";
   };
+  home.file.".setenv".executable = true;
   home.file.".setenv".text = let
+    prefix = "#!${pkgs.bash}/bin/bash";
     mkEnv = attrs: builtins.concatStringsSep "\n" (lib.attrsets.mapAttrsToList
       (name: value: "export ${name}=${toString value}")
       attrs
     );
     config = toString ~/.config;
-  in mkEnv rec {
+  in prefix + "\n\n" + mkEnv rec {
     SETENV   = "1";  # indicate that this file was sourced
 
     KDEWM    = "i3";
