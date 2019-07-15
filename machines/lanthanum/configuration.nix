@@ -130,6 +130,11 @@
   # TODO does this work when the system isn't online at 3:15?
   nix.gc.automatic = true;
   nix.gc.options = "--delete-older-than 30d";
+  nix.extraOptions = ''
+    # Cache downloaded tarballs/repos/source archives for about a month.
+    # The default is one hour, which is bad when I don't have internet.
+    tarball-ttl = 2630000
+  '';
 
   # Allow installation of non-free software such as Slack
   nixpkgs.config.allowUnfree = true;
