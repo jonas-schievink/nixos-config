@@ -77,6 +77,7 @@
   # configurable programs:
 
   programs.home-manager.enable = true;  # make home-manager install and manage itself
+  manual.html.enable = true;            # install the HTML home-manager manual
 
   programs.lesspipe.enable = true;
 
