@@ -2,7 +2,9 @@
 
 # FIXME: nice-to-have, currently stateful, or bug
 # TODO:  regression from Arch setup
-{
+let
+  color = import ./colors.nix { dark = true; };
+in {
   # configure services (these are autostarted by systemd-user):
 
   # TODO: screenshot
@@ -86,8 +88,15 @@
     allowBold = true;
     audibleBell = false;
     cursorBlink = "off";
-    backgroundColor = "#002b36";
     scrollbackLines = 10000;
+
+    backgroundColor = "#${color.background}";
+    foregroundColor = "#${color.foreground}";
+    colorsExtra = let
+      # create config lines like "colorN = #aabbcc"
+      lines = pkgs.lib.lists.imap0 (i: color: "color${toString i} = #${color}") color.colors;
+    in
+      builtins.concatStringsSep "\n" lines;
   };
 
   programs.htop = {
