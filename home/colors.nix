@@ -57,9 +57,21 @@
     assert builtins.stringLength s == 7;
     builtins.substring 1 6 s;
   json = if dark then darkJSON else lightJSON;
-  colors = builtins.fromJSON json;
+  struct = builtins.fromJSON json;
+  accents = (map stripHash) struct.color;
+  colorN = n: builtins.elemAt accents n;
 in {
-  foreground = stripHash colors.foreground;
-  background = stripHash colors.background;
-  colors = (map stripHash) colors.color;
+  foreground = stripHash struct.foreground;
+  background = stripHash struct.background;
+  colors = accents;
+
+  black     = colorN 0;
+  white     = colorN 15;
+  red       = colorN 1;
+  green     = colorN 2;
+  yellow    = colorN 3;
+  darkBlue  = colorN 4;
+  lightBlue = colorN 6;
+  darkGray  = colorN 8;
+  lightGray = colorN 7;
 }

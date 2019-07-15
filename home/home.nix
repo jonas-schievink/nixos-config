@@ -256,6 +256,21 @@ in {
         }
       ];
       modes = {};  # disable resize mode
+
+      colors = let
+        makeClass = { border, indicator ? color.foreground }: {
+          background = "#000000";
+          childBorder = "#${border}";
+          indicator = "#${indicator}";
+          text = "#0000ff";
+          border = "#${border}";
+        };
+      in {
+        focused = makeClass { border = color.darkBlue; indicator = color.yellow; };
+        focusedInactive = makeClass { border = color.darkGray; };
+        unfocused = makeClass { border = color.black; };
+        urgent = makeClass { border = color.red; };
+      };
     };
   };
 
