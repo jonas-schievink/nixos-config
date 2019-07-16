@@ -160,7 +160,26 @@ in {
 
   # FF extensions aren't currently packaged in Nix/home-manager, but they can
   # be synced automatically.
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+
+    profiles.default = {
+      userChrome = ''
+        @-moz-document url("chrome://browser/content/browser.xul") {
+          /* Hide the tab bar */
+          #TabsToolbar {
+            visibility: collapse !important;
+            margin-bottom: 21px !important;
+          }
+
+          /* Hide the Tree Style Tab title bar */
+          #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+            visibility: collapse !important;
+          }
+        }
+      '';
+    };
+  };
 
   programs.neovim = {
     enable = true;
