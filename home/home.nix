@@ -113,9 +113,7 @@ in {
 
   # TODO: `man` completion is broken
 
-  programs.fish = {  # TODO: prompt (omf?)
-    # https://github.com/oh-my-fish/theme-gitstatus
-    # https://github.com/Jomik/dotfiles/tree/d8daa5f1c7c2aa56ea604b63d9a421fe77ff0816/.config/nixpkgs/programs/fish
+  programs.fish = {
     enable = true;
     shellAbbrs = {
       ls = "exa";
@@ -151,6 +149,17 @@ in {
       set fish_greeting  # disable greeting
       set fish_prompt_pwd_dir_length 0
     '';
+
+    promptInit = let
+      src = pkgs.fetchFromGitHub {
+        owner = "oh-my-fish";
+        repo = "theme-gitstatus";
+        rev = "fff23086e1f732f68ba63afef6c625772a86f4f3";
+        sha256 = "0xx8sz8yzi76zzncgh0injvicifgixmmsbh8yvzbinqzxj0ly5hv";
+      };
+      path = src + "/fish_prompt.fish";
+    in
+      builtins.readFile path;
   };
 
   # Enable direnv...
