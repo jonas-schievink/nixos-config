@@ -150,16 +150,7 @@ in {
       set fish_prompt_pwd_dir_length 0
     '';
 
-    promptInit = let
-      src = pkgs.fetchFromGitHub {
-        owner = "oh-my-fish";
-        repo = "theme-gitstatus";
-        rev = "fff23086e1f732f68ba63afef6c625772a86f4f3";
-        sha256 = "0xx8sz8yzi76zzncgh0injvicifgixmmsbh8yvzbinqzxj0ly5hv";
-      };
-      path = src + "/fish_prompt.fish";
-    in
-      builtins.readFile path;
+    promptInit = builtins.readFile ./fish_prompt.fish;
   };
 
   # Enable direnv...
