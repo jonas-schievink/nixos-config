@@ -65,7 +65,7 @@
   services.udev.packages = with pkgs; [
     openocd dfu-util stlink
 
-    ./99-jlink.rules
+    ./99-jlink.rules  # FIXME: this might not actually do anything
   ];
 
   # Enable CUPS to print documents.
