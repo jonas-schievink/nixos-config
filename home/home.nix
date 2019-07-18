@@ -258,7 +258,7 @@ in {
       ];
       focus.newWindow = "focus";  # FIXME should be reset to smart when urgency shows up in bar
       keybindings = lib.mkOptionDefault {
-        "${mod}+d" = null;  # KDE is configured to show the app launcher on Win+D
+        "${mod}+d" = ''exec "rofi -combi-modi window,drun -show combi -modi combi"'';
 
         # resizing
         "${mod}+Ctrl+Left"  = "resize shrink width  5 px or 5 ppt";
@@ -291,6 +291,105 @@ in {
         urgent = makeClass { border = color.red; };
       };
     };
+  };
+
+  programs.rofi = {
+    enable = true;
+
+    cycle = true;
+    font = "Monospace 16";  # FIXME size should depend on DPI (default is too small on HiDPI)
+    scrollbar = true;
+    lines = 20;
+    location = "top";
+
+    # Generate rofi theme (which is pseudo-CSS with a `.rasi` extension, apparently) from the global
+    # color config.
+    theme = let
+      theme = ''
+        /******************************************************************************
+        * ROFI Color theme based on solarized_alternate by Rasmus Steinke
+        ******************************************************************************/
+
+        // `*` denotes the "global properties" section, which specifies default properties. Unlike
+        // in CSS, this will not apply to every single element, it is closer to `html` instead.
+        * {
+            background-color: #${color.background};
+            border-color:     #${color.foregroundAlt};
+            text-color:       #${color.foreground};
+        }
+
+        window {
+            border:           0px 3px solid 3px solid;
+            border-color:     #${color.yellow};
+            padding:          5;
+        }
+        message {
+            border:       1px dash 0px 0px;
+            padding:      1px;
+        }
+        listview {
+            fixed-height: 0;
+            border:       2px dash 0px 0px;
+            spacing:      2px;
+            scrollbar:    true;
+            padding:      2px 0px 0px;
+        }
+        element {
+            border:  0;
+            padding: 1px;
+        }
+
+        // Highlight urgent windows
+        element.urgent {
+            text-color:       #${color.red};
+        }
+
+        // Slightly highlight focused windows
+        element.active {
+            text-color:       #${color.white};
+        }
+
+        // Every second row gets a slightly different bg color
+        element.alternate {
+            background-color: #${color.backgroundAlt};
+        }
+
+        // The selected element is highlighted via background
+        element.selected {
+            background-color: #${color.darkBlue};
+        }
+
+        scrollbar {
+            width:        4px;
+            border:       0;
+            handle-width: 8px;
+            handle-color: #${color.foreground};
+            padding:      0;
+        }
+        mode-switcher {
+            border:       2px dash 0px 0px ;
+        }
+        inputbar {
+            spacing:    0;
+            padding:    1px;
+        }
+        case-indicator {
+            spacing:    0;
+        }
+        entry {
+            spacing:    0;
+        }
+        inputbar {
+            children:   [ textbox-prompt,entry,case-indicator ];
+        }
+        textbox-prompt {
+            expand:     false;
+            str:        ">";
+            margin:     0em 0.3em 0.1em 0em ;
+        }
+      '';
+    in
+      builtins.toFile "rofi-theme-generated.rasi" theme;
   };
 
   # Install additional user packages that don't have their own options.
