@@ -58,8 +58,8 @@ in color // {
   red       = colorN 1;
   green     = colorN 2;
   yellow    = colorN 3;
-  darkBlue  = colorN 4;
-  lightBlue = colorN 6;
+  blue  = colorN 4;
+  cyan = colorN 6;
   darkGray  = colorN 8;
   lightGray = colorN 7;
 }

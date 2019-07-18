@@ -285,7 +285,7 @@ in {
           border = "#${border}";
         };
       in {
-        focused = makeClass { border = color.darkBlue; indicator = color.yellow; };
+        focused = makeClass { border = color.blue; indicator = color.yellow; };
         focusedInactive = makeClass { border = color.darkGray; };
         unfocused = makeClass { border = color.black; };
         urgent = makeClass { border = color.red; };
@@ -356,7 +356,7 @@ in {
 
         // The selected element is highlighted via background
         element.selected {
-            background-color: #${color.darkBlue};
+            background-color: #${color.blue};
         }
 
         scrollbar {
