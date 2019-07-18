@@ -1,70 +1,58 @@
-# JSON taken from terminal.sexy (Export as "JSON Scheme")
-
 { dark }: let
-  darkJSON = ''
-    {
-      "name": "",
-      "author": "",
-      "color": [
-        "#1d1f21",
-        "#cc342b",
-        "#198844",
-        "#fba922",
-        "#3366cc",
-        "#a36ac7",
-        "#52a5ff",
-        "#c5c8c6",
-        "#969896",
-        "#cc342b",
-        "#198844",
-        "#fba922",
-        "#3366cc",
-        "#a36ac7",
-        "#52a5ff",
-        "#ffffff"
-      ],
-      "foreground": "#c5c8c6",
-      "background": "#1d1f21"
-    }
-  '';
-  lightJSON = ''
-    {
-      "name": "",
-      "author": "",
-      "color": [
-        "#1d1f21",
-        "#cc342b",
-        "#198844",
-        "#fba922",
-        "#3366cc",
-        "#a36ac7",
-        "#52a5ff",
-        "#c5c8c6",
-        "#969896",
-        "#cc342b",
-        "#198844",
-        "#fba922",
-        "#3366cc",
-        "#a36ac7",
-        "#52a5ff",
-        "#ffffff"
-      ],
-      "foreground": "#373b41",
-      "background": "#ffffff"
-    }
-  '';
-  stripHash = s:
-    assert builtins.stringLength s == 7;
-    builtins.substring 1 6 s;
-  json = if dark then darkJSON else lightJSON;
-  struct = builtins.fromJSON json;
-  accents = (map stripHash) struct.color;
-  colorN = n: builtins.elemAt accents n;
-in {
-  foreground = stripHash struct.foreground;
-  background = stripHash struct.background;
-  colors = accents;
+  colorsDark = {
+    foreground = "c5c8c6";
+    foregroundAlt = "969896";
+    background = "1d1f21";
+    backgroundAlt = "383c40";
 
+    colors = [
+      "1d1f21"
+      "cc342b"
+      "198844"
+      "fba922"
+      "3366cc"
+      "a36ac7"
+      "52a5ff"
+      "c5c8c6"
+      "969896"
+      "cc342b"
+      "198844"
+      "fba922"
+      "3366cc"
+      "a36ac7"
+      "52a5ff"
+      "ffffff"
+    ];
+  };
+  colorsLight = {
+    foreground = "373b41";
+    foregroundAlt = "656765";
+    background = "e2e5e3";
+    backgroundAlt = "cdd0ce";
+
+    colors = [
+      "1d1f21"
+      "cc342b"
+      "198844"
+      "fba922"
+      "3366cc"
+      "a36ac7"
+      "52a5ff"
+      "c5c8c6"
+      "969896"
+      "cc342b"
+      "198844"
+      "fba922"
+      "3366cc"
+      "a36ac7"
+      "52a5ff"
+      "ffffff"
+    ];
+  };
+
+  color = if dark then colorsDark else colorsLight;
+  colorN = n: builtins.elemAt color.colors n;
+in color // {
   black     = colorN 0;
   white     = colorN 15;
   red       = colorN 1;
