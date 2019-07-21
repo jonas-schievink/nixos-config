@@ -172,8 +172,8 @@ in {
             margin-bottom: 21px !important;
           }
 
-          /* Hide the Tree Style Tab title bar */
-          #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+          /* Hide the Vertical Tabs title bar */
+          #sidebar-box[sidebarcommand="verticaltabsreloaded_go-dev_de-sidebar-action"] #sidebar-header {
             visibility: collapse !important;
           }
         }
