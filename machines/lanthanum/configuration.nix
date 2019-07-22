@@ -61,12 +61,21 @@
 
   # List services that you want to enable:
 
-  # List all udev rule files or packages whose udev rules to install
+  # List all packages whose udev rules to install.
+  # Installs everything in that package's /etc/udev/rules.d and /lib/udev/rules.d
   services.udev.packages = with pkgs; [
     openocd dfu-util stlink
-
-    ./99-jlink.rules  # FIXME: this might not actually do anything
   ];
+  # Install extra `.rules` files
+  services.udev.extraRules = let
+    loadRules = path: ''
+      # ${path}
+      ${builtins.readFile path}
+    '';
+    paths = [
+      ./99-jlink.rules
+    ];
+  in pkgs.lib.concatStrings (map loadRules paths);
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
