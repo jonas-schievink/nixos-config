@@ -4,6 +4,9 @@
 # TODO:  regression from Arch setup
 let
   color = import ./colors.nix { dark = true; };
+
+  # DPI of primary screen. Not yet used everywhere it should be.
+  dpi = 192;
 in {
   # configure services (these are autostarted by systemd-user):
 
@@ -242,6 +245,7 @@ in {
     package = pkgs.i3-gaps;
     config = let
       mod = "Mod4";  # Mod4 = windows key
+      launcherCmd = "rofi -combi-modi window,drun -show combi -modi combi -dpi ${toString dpi}";
     in {
       modifier = mod;
       bars = [];  # disable default bar
@@ -258,7 +262,7 @@ in {
       ];
       focus.newWindow = "focus";  # FIXME should be reset to smart when urgency shows up in bar
       keybindings = lib.mkOptionDefault {
-        "${mod}+d" = ''exec "rofi -combi-modi window,drun -show combi -modi combi"'';
+        "${mod}+d" = ''exec "${launcherCmd}"'';
 
         # resizing
         "${mod}+Ctrl+Left"  = "resize shrink width  5 px or 5 ppt";
@@ -297,7 +301,7 @@ in {
     enable = true;
 
     cycle = true;
-    font = "Monospace 16";  # FIXME size should depend on DPI (default is too small on HiDPI)
+    font = "Monospace 9";
     scrollbar = true;
     lines = 20;
     location = "top";
