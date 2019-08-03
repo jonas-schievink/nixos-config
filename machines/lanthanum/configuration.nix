@@ -43,6 +43,7 @@
 
     # hardware info and debugging utils
     usbutils pciutils lsof nvme-cli smartmontools hdparm htop powertop
+    tpm2-tools
 
     # network utils
     git subversion wget curl
