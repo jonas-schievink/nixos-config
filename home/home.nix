@@ -437,6 +437,10 @@ in {
     hwdec-codecs=all
   '';
 
+  home.file.".gdbinit".text = ''
+    add-auto-load-safe-path /home/jonas/dev
+  '';
+
   # make KDE source the env var configuration on startup
   # yes, this is DE-specific even on X11 :(
   # using PAM means that NixOS will override many vars in /etc/profile
