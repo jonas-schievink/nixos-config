@@ -80,6 +80,9 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  services.pcscd.enable = true;
+  hardware.nitrokey.enable = true;
+
   services.fwupd.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
 
@@ -125,7 +128,7 @@
   users.users.jonas = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "dialout" "input" ];
+    extraGroups = [ "wheel" "dialout" "input" "nitrokey" ];
     shell = pkgs.fish;
   };
 
