@@ -43,7 +43,7 @@
 
     # hardware info and debugging utils
     usbutils pciutils lsof nvme-cli smartmontools hdparm htop powertop
-    tpm2-tools
+    tpm2-tools thunderbolt
 
     # network utils
     git subversion wget curl
@@ -83,6 +83,8 @@
 
   services.pcscd.enable = true;
   hardware.nitrokey.enable = true;
+
+  services.hardware.bolt.enable = true;
 
   services.fwupd.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
