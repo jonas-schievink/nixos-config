@@ -7,6 +7,8 @@ let
 
   # DPI of primary screen. Not yet used everywhere it should be.
   dpi = 192;
+
+  i3 = pkgs.i3-gaps;
 in {
   # configure services (these are autostarted by systemd-user):
 
@@ -38,6 +40,8 @@ in {
     enable = true;
     imageDirectory = toString ~/share/pictures/bgs;
   };
+
+  services.network-manager-applet.enable = true;
 
   # custom systemd units/services/sockets/etc:
 
@@ -240,13 +244,35 @@ in {
 
   xsession.windowManager.i3 = {
     enable = true;
-    package = pkgs.i3-gaps;
+    package = i3;
     config = let
       mod = "Mod4";  # Mod4 = windows key
       launcherCmd = "rofi -combi-modi window,drun -show combi -modi combi -dpi ${toString dpi}";
+      terminal = "${pkgs.termite}/bin/termite";
+
+      # Creates an i3 color config.
+      # border: the window border
+      # indicator: When the container is set to V/H, one of the edges is this color
+      mkColor = { border, indicator ? color.foreground }: {
+        background = "#000000";
+        childBorder = "#${border}";
+        indicator = "#${indicator}";
+        text = "#0000ff";
+        border = "#${border}";
+      };
+
+      mkBarColor = {
+        background ? color.background,
+        border ? color.darkGray,
+        text ? color.foreground,
+      }: {
+        text = "#${text}";
+        background = "#${background}";
+        border = "#${border}";
+      };
+
     in {
       modifier = mod;
-      bars = [];  # disable default bar
       gaps = {
         inner = 5;
         outer = 5;
@@ -260,6 +286,7 @@ in {
       ];
       focus.newWindow = "focus";  # FIXME should be reset to smart when urgency shows up in bar
       keybindings = lib.mkOptionDefault {
+        "${mod}+Return" = ''exec "${terminal}"'';
         "${mod}+d" = ''exec "${launcherCmd}"'';
 
         # resizing
@@ -278,21 +305,34 @@ in {
       ];
       modes = {};  # disable resize mode
 
-      colors = let
-        makeClass = { border, indicator ? color.foreground }: {
-          background = "#000000";
-          childBorder = "#${border}";
-          indicator = "#${indicator}";
-          text = "#0000ff";
-          border = "#${border}";
-        };
-      in {
-        focused = makeClass { border = color.blue; indicator = color.yellow; };
-        focusedInactive = makeClass { border = color.darkGray; };
-        unfocused = makeClass { border = color.black; };
-        urgent = makeClass { border = color.red; };
+      colors = {
+        focused = mkColor { border = color.blue; indicator = color.yellow; };
+        focusedInactive = mkColor { border = color.darkGray; };
+        unfocused = mkColor { border = color.black; };
+        urgent = mkColor { border = color.red; };
       };
+
+      bars = [
+        {
+          position = "top";
+
+          colors = {
+            background = "#${color.background}";
+            focusedWorkspace = mkBarColor { text = color.background; background = color.foreground; };
+            inactiveWorkspace = mkBarColor { text = color.foreground; background = color.background; };
+          };
+
+          fonts = [ "FontAwesome 9" "Noto Mono for Powerline 9" ];
+
+          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3/status.toml";
+        }
+      ];
     };
+  };
+
+  home.file.".config/i3/status.toml" = {
+    onChange = "${i3}/bin/i3 restart";
+    text = builtins.readFile ./i3status-rs.toml;
   };
 
   programs.rofi = {
