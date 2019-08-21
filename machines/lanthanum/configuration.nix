@@ -32,6 +32,25 @@
     defaultLocale = "en_US.UTF-8";
   };
 
+  fonts = {
+    enableDefaultFonts = false;
+
+    fonts = [
+      pkgs.font-awesome_4   # icon font
+      pkgs.powerline-fonts  # Powerline-patched monospace fonts
+      pkgs.noto-fonts
+      pkgs.noto-fonts-cjk
+      pkgs.noto-fonts-emoji
+      pkgs.noto-fonts-extra
+    ];
+
+    fontconfig.defaultFonts = {
+      monospace = [ "Noto Mono for Powerline" ];
+      sansSerif = [ "Noto Sans" ];
+      serif = [ "Noto Serif" ];
+    };
+  };
+
   time.timeZone = "Europe/Berlin";
 
   # System-level packages. Mostly contains system management and debugging
