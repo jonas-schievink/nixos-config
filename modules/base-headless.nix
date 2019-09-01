@@ -29,12 +29,6 @@
 
     # network utils
     git subversion wget curl
-
-    # graphical utils
-    glxinfo
-    xdotool
-    xorg.xdpyinfo xorg.xev xorg.xmodmap xorg.xdriinfo xorg.xrandr xorg.xprop
-    xorg.xwininfo
   ];
 
   security.sudo.extraConfig = ''
