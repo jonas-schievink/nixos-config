@@ -187,13 +187,11 @@ in {
   programs.neovim = {
     enable = true;
     vimAlias = true;
-    configure = {
-      # to get syntax highlighting, the vimrc contents are in their own file
-      customRC = builtins.readFile ./vimrc;
-      packages.custom = with pkgs.vimPlugins; {
-        start = [ vim-airline vim-nix vim-toml ];
-      };
-    };
+    # to get syntax highlighting, the vimrc contents are in their own file
+    extraConfig = builtins.readFile ./vimrc;
+    plugins = with pkgs.vimPlugins; [
+      vim-airline vim-nix vim-toml
+    ];
   };
 
   programs.git = {
