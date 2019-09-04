@@ -38,11 +38,19 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    package = pkgs.bluezFull;
+  };
 
   # Add OpenGL packages
   hardware.opengl = {
-    extraPackages = with pkgs; [vaapiIntel intel-media-driver];
+    extraPackages = with pkgs; [vaapiIntel intel-media-driver intel-ocl];
   };
 
   # Enable the X11 windowing system.
