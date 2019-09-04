@@ -6,7 +6,7 @@
 {
   # Installs everything in that package's /etc/udev/rules.d and /lib/udev/rules.d
   services.udev.packages = with pkgs; [
-    openocd dfu-util stlink
+    openocd dfu-util stlink yubikey-personalization
   ];
   # Install extra `.rules` files
   services.udev.extraRules = let
