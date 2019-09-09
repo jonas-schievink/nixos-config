@@ -51,7 +51,7 @@
   users.users.jonas = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "dialout" "input" "nitrokey" ];
+    extraGroups = [ "wheel" "dialout" "input" "nitrokey" "plugdev" ];
     shell = pkgs.fish;
   };
 
