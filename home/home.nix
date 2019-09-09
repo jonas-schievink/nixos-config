@@ -120,9 +120,9 @@ in {
     enable = true;
     shellAbbrs = {
       ls = "exa";
-      ll = "exa -lFbhgUm";
-      la = "exa -lFbhgUma";
-      tree = "exa --tree -lFbhgUm";
+      ll = "exa -lFbhgm";
+      la = "exa -lFbhgma";
+      tree = "exa --tree -lFbhgm";
       cat = "bat";
       gs = "git status";
       gd = "git diff";
