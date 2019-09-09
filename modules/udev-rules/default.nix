@@ -16,6 +16,7 @@
     '';
     paths = [
       ./99-jlink.rules
+      ./99-stm-dfu.rules
     ];
   in pkgs.lib.concatStrings (map loadRules paths);
 }
