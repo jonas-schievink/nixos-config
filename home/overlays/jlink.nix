@@ -1,8 +1,8 @@
 # Packages the J-Link Software and Documentation pack
 self: super: {
   jlink = let
-    version = "6.48a";
-    sha256 = "0m24iwyw98yv99xza92bgsmjh12irqfv93g1phpcsxgq4gs0i5r6";
+    version = "6.50a";
+    sha256 = "0aza91q44kj754c24fh1cv2bnlj8y03hs886pp8sq8lrpwcf9nzc";
 
     version-squashed = builtins.replaceStrings ["."] [""] version;
     url = "https://www.segger.com/downloads/jlink/JLink_Linux_V${version-squashed}_x86_64.tgz";
