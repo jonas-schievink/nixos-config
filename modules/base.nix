@@ -62,6 +62,13 @@
     xkbVariant = "nodeadkeys";
     autoRepeatDelay = 220;
     autoRepeatInterval = 25;  # 40 Hz
+
+    serverLayoutSection = ''
+      Option "StandbyTime" "0"
+      Option "SuspendTime" "0"
+      Option "OffTime"     "0"
+      Option "BlankTime"   "0"
+    '';
   };
 
   # Enable touchpad support.
