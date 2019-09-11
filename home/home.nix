@@ -491,6 +491,14 @@ in {
     executable = true;
     text = "source $HOME/.setenv";
   };
+  home.file.".xprofile" = {
+    executable = true;
+    text = "source $HOME/.setenv";
+  };
+  home.file.".profile" = {
+    executable = true;
+    text = "source $HOME/.setenv";
+  };
 
   home.file.".setenv" = {
     executable = true;
