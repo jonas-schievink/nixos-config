@@ -487,12 +487,19 @@ in {
     executable = true;
     text = "source $HOME/.setenv";
   };
-  home.file.".setenv".executable = true;
-  home.file.".setenv".text = let
-    prefix = "#!${pkgs.bash}/bin/bash";
-    mkEnv = attrs: builtins.concatStringsSep "\n" (lib.attrsets.mapAttrsToList
-      (name: value: "export ${name}=${toString value}")
-      attrs
-    );
-  in prefix + "\n\n" + mkEnv (import ./env.nix { inherit pkgs; });
+  home.file.".xsessionrc" = {
+    executable = true;
+    text = "source $HOME/.setenv";
+  };
+
+  home.file.".setenv" = {
+    executable = true;
+    text = let
+      prefix = "#!${pkgs.bash}/bin/bash";
+      mkEnv = attrs: builtins.concatStringsSep "\n" (lib.attrsets.mapAttrsToList
+        (name: value: "export ${name}=${toString value}")
+        attrs
+      );
+    in prefix + "\n\n" + mkEnv (import ./env.nix { inherit pkgs; });
+  };
 }
