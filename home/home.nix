@@ -34,8 +34,6 @@ in {
     timeout = 3;
   };
 
-  # XXX "System Settings -> Workspace Theme -> Splash Screen" must be "None"
-  # Otherwise, KDE will overwrite the bg with its splash screen.
   services.random-background = {
     enable = true;
     imageDirectory = toString ~/share/pictures/bgs;
@@ -91,6 +89,11 @@ in {
   manual.html.enable = true;            # install the HTML home-manager manual
 
   programs.lesspipe.enable = true;
+
+  programs.texlive = {
+    enable = true;
+    extraPackages = texlive: { inherit (texlive) scheme-medium dinbrief; };
+  };
 
   programs.termite = {
     enable = true;
