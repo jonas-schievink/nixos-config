@@ -53,7 +53,7 @@
   users.users.jonas = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "dialout" "input" "nitrokey" "plugdev" "vboxusers" ];
+    extraGroups = [ "wheel" "dialout" "input" "nitrokey" "plugdev" "vboxusers" "video" ];
     shell = pkgs.fish;
   };
 
