@@ -38,9 +38,12 @@
   services.fwupd.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
 
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm = {
+    enable = true;
+    autoNumlock = true;
+  };
 
+  # Window manager / DE is enabled here so the session shows up in the display manager
   services.xserver.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
