@@ -306,6 +306,13 @@ in {
 
         # default i3 binding not in home-manager?
         "${mod}+a" = "focus parent";
+
+        "XF86MonBrightnessUp" = "exec ${pkgs.acpilight}/bin/xbacklight -inc 5 intel_backlight";
+        "XF86MonBrightnessDown" = "exec ${pkgs.acpilight}/bin/xbacklight -dec 5 intel_backlight";
+
+        "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio-ctl}/bin/pulseaudio-ctl up 2";
+        "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio-ctl}/bin/pulseaudio-ctl down 2";
+        "XF86AudioMute" = "exec ${pkgs.pulseaudio-ctl}/bin/pulseaudio-ctl mute";
       };
       window.commands = [
         # kill the desktop window containing the wallpaper (i3 tries to tile it)
