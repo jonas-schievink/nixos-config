@@ -47,6 +47,8 @@
     enable = true;
     package = pkgs.bluezFull;
   };
+  # Needed so the blueman-mechanism is available (avoids getting a popup on every login).
+  services.dbus.packages = [ pkgs.blueman ];
 
   # Add OpenGL packages
   hardware.opengl = {
