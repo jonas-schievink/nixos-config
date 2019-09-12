@@ -299,6 +299,13 @@ in {
         "${mod}+Ctrl+Right" = "resize grow   width  5 px or 5 ppt";
         "${mod}+Ctrl+Down"  = "resize grow   height 5 px or 5 ppt";
         "${mod}+Ctrl+Up"    = "resize shrink height 5 px or 5 ppt";
+
+        # additional 10th workspace
+        "${mod}+0" = "workspace 10";
+        "${mod}+Shift+0" = "move container to workspace 10";
+
+        # default i3 binding not in home-manager?
+        "${mod}+a" = "focus parent";
       };
       window.commands = [
         # kill the desktop window containing the wallpaper (i3 tries to tile it)
