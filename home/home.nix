@@ -533,4 +533,24 @@ in {
       );
     in prefix + "\n\n" + mkEnv (import ./env.nix { inherit pkgs; });
   };
+
+
+  home.file.".local/share/applications/reboot.desktop" = {
+    text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Reboot
+      Exec="${pkgs.systemd}/bin/systemctl" reboot
+      Comment=Reboots the System
+    '';
+  };
+  home.file.".local/share/applications/poweroff.desktop" = {
+    text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Power Off
+      Exec="${pkgs.systemd}/bin/systemctl" poweroff
+      Comment=Shuts down the System
+    '';
+  };
 }
