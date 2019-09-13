@@ -5,6 +5,8 @@
 let
   color = import ./colors.nix { dark = true; };
 
+  lockScreen = "${pkgs.i3lock-color}/bin/i3lock-color -c 000000";
+
   # DPI of primary screen. Not yet used everywhere it should be.
   dpi = 192;
 
@@ -293,6 +295,8 @@ in {
       keybindings = lib.mkOptionDefault {
         "${mod}+Return" = ''exec "${terminal}"'';
         "${mod}+d" = ''exec "${launcherCmd}"'';
+
+        "${mod}+l" = ''exec "${lockScreen}"'';
 
         # resizing
         "${mod}+Ctrl+Left"  = "resize shrink width  5 px or 5 ppt";
