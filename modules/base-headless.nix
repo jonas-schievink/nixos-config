@@ -16,6 +16,9 @@
     defaultLocale = "en_US.UTF-8";
   };
 
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
+
   # System-level packages. Mostly contains system management and debugging
   # utils.
   # $ nix search <NAME>
