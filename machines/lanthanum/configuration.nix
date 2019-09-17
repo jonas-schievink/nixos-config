@@ -49,9 +49,6 @@
     package = pkgs.i3-gaps;
   };
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jonas = {
     isNormalUser = true;
