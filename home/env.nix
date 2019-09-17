@@ -22,4 +22,7 @@
 
   # add C compiler runtime libs to LD path to fix rust-lld
   LD_LIBRARY_PATH  = "${pkgs.stdenv.cc.cc.lib}/lib64:$LD_LIBRARY_PATH";
+
+  # set the man pager to `less` manually, since some systems don't use one by default
+  MANPAGER = "${pkgs.less}/bin/less";
 }
