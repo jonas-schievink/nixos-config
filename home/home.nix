@@ -179,7 +179,7 @@ in {
 
     profiles.default = {
       userChrome = ''
-        @-moz-document url("chrome://browser/content/browser.xul") {
+        @-moz-document url("chrome://browser/content/browser.xhtml") {
           /* Hide the tab bar */
           #TabsToolbar {
             visibility: collapse !important;
