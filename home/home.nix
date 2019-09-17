@@ -254,7 +254,7 @@ in {
     package = i3;
     config = let
       mod = "Mod4";  # Mod4 = windows key
-      launcherCmd = "rofi -combi-modi window,drun -show combi -modi combi -dpi ${toString dpi}";
+      launcherCmd = "rofi -show drun -dpi ${toString dpi}";
       terminal = "${pkgs.termite}/bin/termite";
 
       # Creates an i3 color config.
