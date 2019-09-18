@@ -5,6 +5,9 @@ self: super: {
     sha256 = "0aza91q44kj754c24fh1cv2bnlj8y03hs886pp8sq8lrpwcf9nzc";
 
     version-squashed = builtins.replaceStrings ["."] [""] version;
+
+    # Check for new versions at:
+    # https://www.segger.com/downloads/jlink/#J-LinkSoftwareAndDocumentationPack
     url = "https://www.segger.com/downloads/jlink/JLink_Linux_V${version-squashed}_x86_64.tgz";
 
     runtimeDeps = [ super.libudev ];
@@ -13,20 +16,14 @@ self: super: {
     inherit version;
 
     # Custom fetchurl-inspired src derivation that... "obtains" the sources
-    src = super.stdenv.mkDerivation rec {
-      name = baseNameOf (toString url);
+    src = super.runCommand (baseNameOf (toString url)) {
       buildInputs = [ super.curl ];
-
-      builder = builtins.toFile "builder.sh" ''
-        source $stdenv/setup
-
-        curl -k -d 'accept_license_agreement=accepted&submit=Download+software' '${url}' -o "$out"
-      '';
-
       outputHashMode = "flat";
       outputHashAlgo = "sha256";
       outputHash = sha256;
-    };
+    } ''
+      curl -k -d 'accept_license_agreement=accepted&submit=Download+software' '${url}' -o "$out"
+    '';
 
     buildInputs = with super; [
       autoPatchelfHook
