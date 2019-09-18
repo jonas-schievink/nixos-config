@@ -351,6 +351,11 @@ in {
         }
       ];
     };
+
+    extraConfig = ''
+      exec --no-startup-id ${i3}/bin/i3-msg workspace 1
+      exec --no-startup-id ${pkgs.xorg.xsetroot}/bin/xsetroot -solid black
+    '';
   };
 
   home.file.".config/i3/status.toml" = {
