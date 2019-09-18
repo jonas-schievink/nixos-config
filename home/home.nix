@@ -28,6 +28,8 @@ in {
   # Features:
   # * Popup when plugging in ext. display
 
+  fonts.fontconfig.enable = true;
+
   services.syncthing.enable = true;
 
   services.unclutter = {
