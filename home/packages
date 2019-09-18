@@ -32,11 +32,9 @@ wmctrl
 vscode
 clang
 lld
-cargo-edit
 cargo-fuzz
 cargo-release
 cargo-tree
-cargo-update
 xdg-user-dirs
 jetbrains.idea-community
 openocd
