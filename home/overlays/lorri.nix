@@ -3,8 +3,10 @@ self: super: {
     src = super.fetchFromGitHub {
       owner = "target";
       repo = "lorri";
-      rev = "a0f21810c7e0476c206d63b80414b0d6111bfafb";
-      sha256 = "1y2fvyhlk64idwv8y0smws92bkk51j8z4bagvvlncv3q31147i9n";
+
+      # To update, use the latest commit on the `rolling-release` branch
+      rev = "38eae3d487526ece9d1b8c9bb0d27fb45cf60816";
+      sha256 = "11k9lxg9cv6dlxj4haydvw4dhcfyszwvx7jx9p24jadqsy9jmbj4";
     };
 
     pkg = import src {
