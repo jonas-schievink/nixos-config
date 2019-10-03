@@ -94,6 +94,9 @@ in {
 
   programs.lesspipe.enable = true;
 
+  programs.ssh.enable = true;
+  programs.ssh.hashKnownHosts = true;
+
   programs.texlive = {
     enable = true;
     extraPackages = texlive: { inherit (texlive) scheme-medium dinbrief; };
@@ -546,6 +549,9 @@ in {
     in prefix + "\n\n" + mkEnv (import ./env.nix { inherit pkgs; });
   };
 
+  #home.file."bin/ssh" = {
+  #  source = "${pkgs.ssh-ident}/bin/ssh-ident";
+  #};
 
   home.file.".local/share/applications/reboot.desktop" = {
     text = ''
