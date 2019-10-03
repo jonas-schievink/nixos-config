@@ -6,6 +6,7 @@
 {
   imports = [
     ./base-headless.nix
+    ./bluetooth.nix
   ];
 
   # Install additional system programs
@@ -38,17 +39,7 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
-  };
-
-  hardware.bluetooth = {
-    enable = true;
-    package = pkgs.bluezFull;
-  };
-  # Needed so the blueman-mechanism is available (avoids getting a popup on every login).
-  services.dbus.packages = [ pkgs.blueman ];
+  hardware.pulseaudio.enable = true;
 
   # Add OpenGL packages
   hardware.opengl = {
