@@ -1,0 +1,5 @@
+# Makes the MCP2210 USB-to-SPI converter accessible to all users
+
+SUBSYSTEM=="usb", ATTRS{idVendor}=="04d8", ATTRS{idProduct}=="00de", MODE:="0666"
+
+KERNEL=="hidraw*", ATTRS{busnum}=="1", ATTRS{idVendor}=="04d8", ATTRS{idProduct}=="00de", MODE:="0666"
