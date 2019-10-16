@@ -220,9 +220,6 @@ in {
       pull.rebase = true;      # rebase instead of merge on pull
       rebase.autostash = true; # autostash on rebase to simplify `git pull` workflow
       rerere.enabled = true;
-      url = {
-        "ssh://git@github.com" = { insteadOf = "https://github.com"; };
-      };
     };
     ignores = [
       ".idea"
