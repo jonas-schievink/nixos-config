@@ -39,7 +39,7 @@ cargo-release
 cargo-tree
 xdg-user-dirs
 jetbrains.idea-community
-openocd
+openocd-git
 rustup
 gdb
 gcc-arm-embedded
