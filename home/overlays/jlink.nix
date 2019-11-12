@@ -1,8 +1,8 @@
 # Packages the J-Link Software and Documentation pack
 self: super: {
   jlink = let
-    version = "6.50a";
-    sha256 = "0aza91q44kj754c24fh1cv2bnlj8y03hs886pp8sq8lrpwcf9nzc";
+    version = "6.54a";
+    sha256 = "1zksyvqvv1x7qh97rdb4n340bs7hg6hqb0d9r88xwmymq8gy3250";
 
     version-squashed = builtins.replaceStrings ["."] [""] version;
 
@@ -22,7 +22,7 @@ self: super: {
       outputHashAlgo = "sha256";
       outputHash = sha256;
     } ''
-      curl -k -d 'accept_license_agreement=accepted&submit=Download+software' '${url}' -o "$out"
+      curl -k -d 'accept_license_agreement=accepted&non_emb_ctr=confirmed&submit=Download+software' '${url}' -o "$out"
     '';
 
     buildInputs = with super; [
