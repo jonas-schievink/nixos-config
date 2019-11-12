@@ -27,6 +27,8 @@
 
   time.timeZone = "Europe/Berlin";
 
+  services.logind.lidSwitchExternalPower = "ignore";
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
