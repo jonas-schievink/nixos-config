@@ -265,11 +265,16 @@ in {
       # Creates an i3 color config.
       # border: the window border
       # indicator: When the container is set to V/H, one of the edges is this color
-      mkColor = { border, indicator ? color.foreground }: {
-        background = "#000000";
+      mkColor = {
+        border,
+        indicator ? color.foreground,
+        background ? color.background,
+        foreground ? color.foreground,
+      }: {
+        background = "#${background}";
         childBorder = "#${border}";
         indicator = "#${indicator}";
-        text = "#0000ff";
+        text = "#${foreground}";
         border = "#${border}";
       };
 
@@ -334,7 +339,12 @@ in {
       modes = {};  # disable resize mode
 
       colors = {
-        focused = mkColor { border = color.blue; indicator = color.yellow; };
+        focused = mkColor {
+          border = color.blue;
+          indicator = color.yellow;
+          background = color.foreground;
+          foreground = color.background;
+        };
         focusedInactive = mkColor { border = color.darkGray; };
         unfocused = mkColor { border = color.black; };
         urgent = mkColor { border = color.red; };
