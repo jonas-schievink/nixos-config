@@ -1,3 +1,9 @@
+mdbook
+python38Packages.pip
+wireshark-qt
+iotop
+jq
+linuxPackages.perf
 kicad
 unrar
 bind
