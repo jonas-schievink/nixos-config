@@ -69,4 +69,10 @@
     enable = true;
     naturalScrolling = true;  # touchpad
   };
+
+  virtualisation.libvirtd = {
+    enable = true;
+    onBoot = "ignore";
+    qemuRunAsRoot = false;
+  };
 }
