@@ -1,12 +1,12 @@
 self: super: {
   openocd-git = super.stdenv.mkDerivation rec {
     name = "openocd-git+${version}";
-    version = "ded67990";
+    version = "9c196b0b";
 
     src = super.fetchgit {
       url = "https://repo.or.cz/openocd.git";
       rev = version;
-      sha256 = "1mmf8348xwddjzcvhjy5ndiadgfk9xsmxm2s6zvn7vdf36wmh9m4";
+      sha256 = "00fzy7l4ansk9cs1ndsbqhylk8zixgl0q9bzqaax6v87wjadkvbx";
       leaveDotGit = true;
     };
 
