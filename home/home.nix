@@ -507,11 +507,9 @@ in {
 
   home.extraOutputsToInstall = [ "doc" "info" "devdoc" ];
 
-  # NixOS always puts ~/bin in every users $PATH, so use that for Cargo binaries
-  # This will unfortunately also create `~/.crates.toml`
   home.file.".cargo/config".text = ''
     [install]
-    root = "${toString ~/.}"
+    root = "${toString ~/.local}"
   '';
 
   home.file.".config/mpv/mpv.conf".text = ''

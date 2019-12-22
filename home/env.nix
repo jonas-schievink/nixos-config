@@ -25,4 +25,6 @@
 
   # set the man pager to `less` manually, since some systems don't use one by default
   MANPAGER = "${pkgs.less}/bin/less";
+
+  PATH = "~/.local/bin:$PATH";
 }
