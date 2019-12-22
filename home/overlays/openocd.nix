@@ -6,7 +6,7 @@ self: super: {
     src = super.fetchgit {
       url = "https://repo.or.cz/openocd.git";
       rev = version;
-      sha256 = "00fzy7l4ansk9cs1ndsbqhylk8zixgl0q9bzqaax6v87wjadkvbx";
+      sha256 = "1wn063f7z6wv8b59c9hhspkh69gbxwr05jwcml0yk9iwa86amx51";
       leaveDotGit = true;
     };
 
