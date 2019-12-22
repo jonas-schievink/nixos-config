@@ -41,9 +41,13 @@ wmctrl
 vscode
 clang
 lld
+cargo-edit
+cargo-outdated
+cargo-update
 cargo-fuzz
 cargo-release
 cargo-tree
+cargo-watch
 xdg-user-dirs
 jetbrains.idea-community
 openocd-git
