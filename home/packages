@@ -62,6 +62,7 @@ gitAndTools.hub
 nmap-graphical
 file
 jlink
+nrf-tools
 ltrace
 patchelf
 telnet
