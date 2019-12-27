@@ -16,8 +16,8 @@
 }:
 
 let
-  version = "6.54a";
-  sha256 = "1zksyvqvv1x7qh97rdb4n340bs7hg6hqb0d9r88xwmymq8gy3250";
+  version = "6.60c";
+  sha256 = "1b6f51yjiqcc0c9wdr3zlr7wkqsqh1npdvv8gp2nsa9bycvnixib";
 
   version-squashed = builtins.replaceStrings ["."] [""] version;
 
