@@ -28,6 +28,13 @@ in {
   # Features:
   # * Popup when plugging in ext. display
 
+  # Ensure keyboard layout is inherited from OS config
+  home.keyboard = {
+    layout = null;
+    model = null;
+    variant = null;
+  };
+
   fonts.fontconfig.enable = true;
 
   services.syncthing.enable = true;
