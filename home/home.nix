@@ -224,7 +224,7 @@ in {
 
   # The screen locker needs `xsession.enable = true`
   services.screen-locker.enable = true;
-  services.screen-locker.lockCmd = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+  services.screen-locker.lockCmd = "${lockScreen}";
 
   xsession.enable = true;
   xsession.windowManager.i3 = {
