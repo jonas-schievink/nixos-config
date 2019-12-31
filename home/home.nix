@@ -16,21 +16,11 @@ in {
     ./modules/cli-base
   ];
 
-  # configure services (these are autostarted by systemd-user):
-
   # TODO: screenshot
-  # TODO: on boot/login: amixer -c0 sset 'Headphone Mic Boost' 10dB
+  # FIXME: on boot/login: amixer -c0 sset 'Headphone Mic Boost' 10dB
   # (gets rid of white noise on headphone output)
 
-  # XXX KDE:
-  # Display and Monitor
-  # * Rendering backend: OpenGL 3.1
-  # * Animation speed: Instant
-  # Startup and Shutdown -> Desktop Session
-  # * check "Start with an empty session"
-  # * uncheck "Confirm logout"
-  # Features:
-  # * Popup when plugging in ext. display
+  # FIXME: Popup when plugging in ext. display (or autorandr)
 
   # Ensure keyboard layout is inherited from OS config
   home.keyboard = {
@@ -403,10 +393,6 @@ in {
   # yes, this is DE-specific even on X11 :(
   # using PAM means that NixOS will override many vars in /etc/profile
   # using home.sessionVariables means the vars are only available inside terminals
-  home.file.".config/plasma-workspace/env/vars.sh" = {
-    executable = true;
-    text = "source $HOME/.setenv";
-  };
   home.file.".xsessionrc" = {
     executable = true;
     text = "source $HOME/.setenv";
