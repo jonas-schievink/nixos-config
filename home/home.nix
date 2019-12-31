@@ -389,32 +389,28 @@ in {
     add-auto-load-safe-path /home/jonas/dev
   '';
 
-  # make KDE source the env var configuration on startup
-  # yes, this is DE-specific even on X11 :(
-  # using PAM means that NixOS will override many vars in /etc/profile
-  # using home.sessionVariables means the vars are only available inside terminals
-  home.file.".xsessionrc" = {
-    executable = true;
-    text = "source $HOME/.setenv";
-  };
-  home.file.".xprofile" = {
-    executable = true;
-    text = "source $HOME/.setenv";
-  };
-  home.file.".profile" = {
-    executable = true;
-    text = "source $HOME/.setenv";
-  };
+  home.sessionVariables = rec {
+    PATH = "/home/$USER/.local/bin:$PATH";
 
-  home.file.".setenv" = {
-    executable = true;
-    text = let
-      prefix = "#!${pkgs.bash}/bin/bash";
-      mkEnv = attrs: builtins.concatStringsSep "\n" (lib.attrsets.mapAttrsToList
-        (name: value: "export ${name}=${toString value}")
-        attrs
-      );
-    in prefix + "\n\n" + mkEnv (import ./env.nix { inherit pkgs; });
+    # Add C compiler runtime libs to LD path to fix rust-lld.
+    # Works around https://github.com/rust-lang/rust/issues/55979
+    LD_LIBRARY_PATH  = "${pkgs.stdenv.cc.cc.lib}/lib64:$LD_LIBRARY_PATH";
+
+    EDITOR   = "nvim";
+    VISUAL   = "${EDITOR}";
+    TERMINAL = "termite";
+
+    # set the man pager to `less` manually, since some systems don't use one by default
+    MANPAGER = "${pkgs.less}/bin/less";
+
+    XDG_DOWNLOAD_DIR = ~/downloads;
+    XDG_PICTURES_DIR = ~/share/pictures;
+    XDG_DESKTOP_DIR  = ~/.;  # prevent ~/Desktop from being created automatically
+
+    WEECHAT_HOME     = ~/.config/weechat;
+    LESSHISTFILE     = "-";
+
+    MOZ_USE_XINPUT2 = "1";
   };
 
   home.file.".local/share/applications/reboot.desktop" = {
