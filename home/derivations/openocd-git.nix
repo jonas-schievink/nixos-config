@@ -17,13 +17,13 @@
 
 stdenv.mkDerivation rec {
   name = "openocd-git+${version}";
-  version = "9c196b0b";
+  version = "9f1529da";
 
   # Can't use fetchFromRepoOrCz because we need .git for the submodules
   src = fetchgit {
     url = "https://repo.or.cz/openocd.git";
     rev = version;
-    sha256 = "1wn063f7z6wv8b59c9hhspkh69gbxwr05jwcml0yk9iwa86amx51";
+    sha256 = "0y45v41hdxlfzc4knbwwhldqx7hlzc5rjwqs3xp6yh2cqyyqp3s6";
     leaveDotGit = true;
   };
 
