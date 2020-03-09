@@ -11,8 +11,8 @@
   # The firewall logging is very verbose in dmesg, tone it down a bit
   networking.firewall.logRefusedConnections = false;
 
+  console.keyMap = "de-latin1-nodeadkeys";
   i18n = {
-    consoleKeyMap = "de-latin1-nodeadkeys";
     defaultLocale = "en_US.UTF-8";
   };
 

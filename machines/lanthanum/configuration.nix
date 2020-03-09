@@ -23,7 +23,7 @@
   networking.hostName = "lanthanum";
   networking.networkmanager.enable = true;
 
-  i18n.consoleFont = "latarcyrheb-sun32";  # largest font in kbd pkg (for HiDPI)
+  console.font = "latarcyrheb-sun32";  # largest font in kbd pkg (for HiDPI)
 
   time.timeZone = "Europe/Berlin";
 
