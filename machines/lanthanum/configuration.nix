@@ -27,7 +27,11 @@
 
   time.timeZone = "Europe/Berlin";
 
+  services.logind.lidSwitch = "suspend-then-hibernate";
   services.logind.lidSwitchExternalPower = "ignore";
+  services.logind.extraConfig = ''
+    HandlePowerKey=hibernate
+  '';
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
