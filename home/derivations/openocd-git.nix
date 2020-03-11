@@ -23,8 +23,7 @@ stdenv.mkDerivation rec {
   src = fetchgit {
     url = "https://repo.or.cz/openocd.git";
     rev = version;
-    sha256 = "0mxx3pyylsmqjw3a2k3r9zf5rhndiylmvg4q3amli3v1zy8az28j";
-    deepClone = true;
+    sha256 = "12zxih93ygb2hq9llgd0ji3qwfhy7d1kax50jpp1qnfgmabnjs6f";
   };
 
   buildInputs = [
