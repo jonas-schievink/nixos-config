@@ -14,6 +14,7 @@ let
 in {
   imports = [
     ./modules/cli-base
+    ./modules/notifyd
   ];
 
   # TODO: screenshot
