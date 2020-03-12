@@ -19,6 +19,8 @@
   boot.loader.systemd-boot.enable = true;
   # Allow installation of bootloader into EFI vars.
   boot.loader.efi.canTouchEfiVariables = true;
+  # Speed up the boot a little.
+  boot.loader.timeout = 1;
 
   networking.hostName = "lanthanum";
   networking.networkmanager.enable = true;
