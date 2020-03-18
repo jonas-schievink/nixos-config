@@ -5,7 +5,8 @@
 let
   color = import ./colors.nix { dark = true; };
 
-  lockScreen = "${pkgs.i3lock-color}/bin/i3lock-color -c 000000";
+  # lockScreen = "${pkgs.i3lock-color}/bin/i3lock-color -c 000000";
+  lockScreen = "/bin/i3lock -c 000000";
 
   # DPI of primary screen. Not yet used everywhere it should be.
   dpi = 192;
@@ -49,6 +50,21 @@ in {
   services.pasystray.enable = true;
   services.blueman-applet.enable = true;
   services.lorri.enable = true;
+
+  systemd.user.services.nix-gc = {
+    Unit = {
+      Description = "Nix Garbage Collector";
+    };
+    Service = {
+      ExecStart = "${pkgs.nix.out}/bin/nix-collect-garbage --delete-older-than 21d";
+    };
+  };
+  systemd.user.timers.nix-gc = {
+    Timer = {
+      Persistent = true;
+      OnCalendar = "daily";
+    };
+  };
 
   # configurable programs:
 
@@ -122,6 +138,7 @@ in {
   services.screen-locker.lockCmd = "${lockScreen}";
 
   xsession.enable = true;
+  xsession.initExtra = "systemctl --user import-environment";
   xsession.windowManager.i3 = {
     enable = true;
     package = i3;
@@ -391,7 +408,7 @@ in {
   '';
 
   home.sessionVariables = rec {
-    PATH = "/home/$USER/.local/bin:$PATH";
+    PATH = "$HOME/.local/bin:$PATH";
 
     EDITOR   = "nvim";
     VISUAL   = "${EDITOR}";
@@ -408,6 +425,10 @@ in {
     LESSHISTFILE     = "-";
 
     MOZ_USE_XINPUT2 = "1";
+
+    # FIXME: These are only needed when not running on NixOS
+    XDG_DATA_DIRS = "$XDG_DATA_DIRS:$HOME/.nix-profile/share:/usr/share";
+    SSL_CERT_FILE = "$NIX_SSL_CERT_FILE";
   };
 
   home.file.".local/share/applications/reboot.desktop" = {

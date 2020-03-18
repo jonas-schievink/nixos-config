@@ -80,7 +80,7 @@
   programs.git = {
     enable = true;
     userName = "Jonas Schievink";
-    userEmail = "jonasschievink@gmail.com";
+    userEmail = "jonas.schievink@ferrous-systems.com";
     extraConfig = {
       push.default = "simple";
       push.followTags = true;  # push tags by default
@@ -99,6 +99,7 @@
       "*.autosave"
       ".vscode"
       "__pycache__/"
+      ".osync_workdir"
 
       # Avoid the "i use nix btw" starter pack
       ".envrc"
