@@ -12,6 +12,9 @@
     Service = {
       ExecStart = "${pkgs.xfce.xfce4-notifyd.out}/lib/xfce4/notifyd/xfce4-notifyd";
     };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
   };
 
   # TODO: Config generation etc.
