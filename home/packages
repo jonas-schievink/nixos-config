@@ -42,7 +42,6 @@ clang
 lld
 cargo-edit
 cargo-outdated
-cargo-update
 cargo-fuzz
 cargo-release
 cargo-tree
