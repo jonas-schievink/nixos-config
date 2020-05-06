@@ -393,10 +393,6 @@ in {
   home.sessionVariables = rec {
     PATH = "/home/$USER/.local/bin:$PATH";
 
-    # Add C compiler runtime libs to LD path to fix rust-lld.
-    # Works around https://github.com/rust-lang/rust/issues/55979
-    LD_LIBRARY_PATH  = "${pkgs.stdenv.cc.cc.lib}/lib64:$LD_LIBRARY_PATH";
-
     EDITOR   = "nvim";
     VISUAL   = "${EDITOR}";
     TERMINAL = "termite";
