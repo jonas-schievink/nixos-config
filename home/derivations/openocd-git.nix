@@ -10,6 +10,7 @@
   git,
   jimtcl,
   libusb,
+  libusb-compat-0_1,
   hidapi,
 }:
 
@@ -27,7 +28,7 @@ stdenv.mkDerivation rec {
   };
 
   buildInputs = [
-    libtool pkg-config automake autoconf which git jimtcl libusb hidapi
+    libtool pkg-config automake autoconf which git jimtcl libusb libusb-compat-0_1 hidapi
   ];
 
   features = [
