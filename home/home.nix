@@ -64,6 +64,9 @@ in {
       Persistent = true;
       OnCalendar = "daily";
     };
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
   };
 
   # configurable programs:
