@@ -88,6 +88,7 @@
       rebase.autostash = true; # autostash on rebase to simplify `git pull` workflow
       rerere.enabled = true;
     };
+    delta.enable = true;
     ignores = [
       ".idea"
       "*.iml"
