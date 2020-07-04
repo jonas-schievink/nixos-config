@@ -1,3 +1,7 @@
+ninja
+wol
+valgrind
+massif-visualizer
 virt-manager
 mdbook
 python38Packages.pip
