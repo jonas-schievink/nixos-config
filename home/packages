@@ -60,6 +60,7 @@ gnumake
 python3Full
 stm32flash
 stlink
+nrfutil
 gitAndTools.hub
 nmap-graphical
 file
