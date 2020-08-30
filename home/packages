@@ -47,9 +47,7 @@ clang
 lld
 cargo-edit
 cargo-outdated
-cargo-fuzz
 cargo-release
-cargo-tree
 cargo-watch
 xdg-user-dirs
 jetbrains.idea-community
