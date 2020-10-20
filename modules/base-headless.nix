@@ -11,6 +11,10 @@
   # The firewall logging is very verbose in dmesg, tone it down a bit
   networking.firewall.logRefusedConnections = false;
 
+  networking.hosts = {
+    "51.158.191.151" = ["cerium"];
+  };
+
   console.keyMap = "de-latin1-nodeadkeys";
   i18n = {
     defaultLocale = "en_US.UTF-8";
