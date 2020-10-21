@@ -30,6 +30,12 @@
   environment.systemPackages = with pkgs; [
   ];
 
+  # Limit journald disk usage, which is in short supply here. It still uses too much RAM.
+  services.journald.extraConfig = ''
+    SystemMaxUse=25M
+    SystemMaxFileSize=5M
+  '';
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
