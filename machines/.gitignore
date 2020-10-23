@@ -2,3 +2,5 @@
 # itself
 hardware-configuration.nix
 
+# Keep all private key material local
+*.key

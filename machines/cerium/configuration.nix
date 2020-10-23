@@ -12,10 +12,14 @@
     ../../modules/base-headless.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/vda";
   boot.loader.timeout = 1;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  boot.enableContainers = false;
+  boot.initrd.checkJournalingFS = false;
 
   networking.hostName = "cerium";
 
@@ -23,7 +27,30 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.ens2.useDHCP = true;
+  networking.interfaces.ens3.ipv4 = {
+    addresses = [
+      { address = "130.255.76.128"; prefixLength = 24; }
+    ];
+  };
+  networking.defaultGateway = "130.255.76.1";
+  networking.nameservers = [ "9.9.9.9" "8.8.8.8" "8.8.4.4" ];
+
+  # VPN setup
+  #networking.wireguard.enable = true;
+  #networking.wireguard.interfaces.wg0 = {
+  #  ips = ["10.11.12.0/24"];
+  #  listenPort = 51820;
+  #  generatePrivateKeyFile = true;
+  #  privateKeyFile = toString ./wireguard.key;
+#
+#    peers = [
+#      {
+#        # archbox
+#        publicKey = "0Ddcfeyq6AmFNnwVeNDobURaX1uXoiawGiEBa7MuVQ8=";
+#        allowedIPs = ["0.0.0.0/0"];
+#      }
+#    ];
+#  };
 
   time.timeZone = "Europe/Amsterdam";
 
@@ -48,6 +75,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAq4ZG05caswrLQz/QoMcY2r35iWvCriRkpFB/eJGaK3 jonas@lanthanum"
     ];
     shell = pkgs.fish;
+    initialHashedPassword = ""; # FIXME
   };
 
   # This machine just runs daemons and only needs an administration user (root, defined above)
