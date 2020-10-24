@@ -86,7 +86,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAq4ZG05caswrLQz/QoMcY2r35iWvCriRkpFB/eJGaK3 jonas@lanthanum"
     ];
     shell = pkgs.fish;
-    initialHashedPassword = ""; # FIXME
   };
 
   # This machine just runs daemons and only needs an administration user (root, defined above)
