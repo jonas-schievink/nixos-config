@@ -36,6 +36,8 @@
   networking.nameservers = [ "9.9.9.9" "8.8.8.8" "8.8.4.4" ];
 
   # VPN setup
+  # (this is a wireguard "supernode" that does not by itself participate in the VPN; it is only for
+  # routing and has a static and public IP)
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
   };
