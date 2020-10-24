@@ -25,6 +25,21 @@
   networking.hostName = "lanthanum";
   networking.networkmanager.enable = true;
 
+  networking.wireguard.enable = true;
+  networking.wireguard.interfaces.cerium = {
+    ips = ["10.11.12.3/24"];
+    privateKeyFile = toString ./wireguard.key;
+    generatePrivateKeyFile = true;
+    peers = [
+      {
+        # cerium
+        publicKey = "PHPLjHE3SjlMPTEvDlXqJDwnZXtvXGftiBTgMefdWSU=";
+        allowedIPs = ["10.11.12.0/24"];
+        endpoint = "cerium:51820";
+      }
+    ];
+  };
+
   console.font = "latarcyrheb-sun32";  # largest font in kbd pkg (for HiDPI)
 
   time.timeZone = "Europe/Berlin";
