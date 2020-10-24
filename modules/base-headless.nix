@@ -12,7 +12,7 @@
   networking.firewall.logRefusedConnections = false;
 
   networking.hosts = {
-    "51.158.191.151" = ["cerium"];
+    "130.255.76.128" = ["cerium"];
   };
 
   console.keyMap = "de-latin1-nodeadkeys";
