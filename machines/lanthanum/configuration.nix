@@ -7,9 +7,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    # Use an absolute path since this is stored on the machine, not in the
-    # config repo.
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
 
     ../../modules/base.nix
     ../../modules/udev-rules
