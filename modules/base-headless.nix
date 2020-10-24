@@ -12,7 +12,15 @@
   networking.firewall.logRefusedConnections = false;
 
   networking.hosts = {
-    "130.255.76.128" = ["cerium"];
+    "130.255.76.128" = ["cerium"];  # public IP
+
+    # VPN IPs
+    "10.11.12.1" = ["cerium.home"];
+    "10.11.12.2" = ["archbox.home"];
+    "10.11.12.3" = ["lanthanum.home"];
+
+    # The .home TLD is used as per:
+    # https://www.icann.org/resources/board-material/resolutions-2018-02-04-en#2.c
   };
 
   console.keyMap = "de-latin1-nodeadkeys";
