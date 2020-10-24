@@ -36,6 +36,9 @@
   networking.nameservers = [ "9.9.9.9" "8.8.8.8" "8.8.4.4" ];
 
   # VPN setup
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+  };
   networking.firewall = {
     allowedUDPPorts = [ 51820 ];
   };
@@ -49,12 +52,12 @@
       {
         # archbox
         publicKey = "0Ddcfeyq6AmFNnwVeNDobURaX1uXoiawGiEBa7MuVQ8=";
-        allowedIPs = ["10.11.12.0/24"];
+        allowedIPs = ["10.11.12.2/32"];
       }
       {
         # lanthanum
         publicKey = "4PPLl1dfvbuwHAJjjBzeDWlM66TKCGYCdzPb+ppphRM=";
-        allowedIPs = ["10.11.12.0/24"];
+        allowedIPs = ["10.11.12.3/32"];
       }
     ];
   };
