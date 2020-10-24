@@ -61,6 +61,11 @@
         publicKey = "4PPLl1dfvbuwHAJjjBzeDWlM66TKCGYCdzPb+ppphRM=";
         allowedIPs = ["10.11.12.3/32"];
       }
+      {
+        # yttrium
+        publicKey = "0MIHnjztjoUf+QC6RMp1rgZANtVc1yu4Fi3kd9wgFU0=";
+        allowedIPs = ["10.11.12.4/32"];
+      }
     ];
   };
 
