@@ -36,21 +36,23 @@
   networking.nameservers = [ "9.9.9.9" "8.8.8.8" "8.8.4.4" ];
 
   # VPN setup
-  #networking.wireguard.enable = true;
-  #networking.wireguard.interfaces.wg0 = {
-  #  ips = ["10.11.12.0/24"];
-  #  listenPort = 51820;
-  #  generatePrivateKeyFile = true;
-  #  privateKeyFile = toString ./wireguard.key;
-#
-#    peers = [
-#      {
-#        # archbox
-#        publicKey = "0Ddcfeyq6AmFNnwVeNDobURaX1uXoiawGiEBa7MuVQ8=";
-#        allowedIPs = ["0.0.0.0/0"];
-#      }
-#    ];
-#  };
+  networking.firewall = {
+    allowedUDPPorts = [ 51820 ];
+  };
+  networking.wireguard.enable = true;
+  networking.wireguard.interfaces.wg0 = {
+    ips = ["10.11.12.1/24"];
+    listenPort = 51820;
+    privateKeyFile = toString ./wireguard.key;
+    generatePrivateKeyFile = true;
+    peers = [
+      {
+        # archbox
+        publicKey = "0Ddcfeyq6AmFNnwVeNDobURaX1uXoiawGiEBa7MuVQ8=";
+        allowedIPs = ["10.11.12.0/24"];
+      }
+    ];
+  };
 
   time.timeZone = "Europe/Amsterdam";
 
