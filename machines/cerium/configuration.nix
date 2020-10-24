@@ -51,6 +51,11 @@
         publicKey = "0Ddcfeyq6AmFNnwVeNDobURaX1uXoiawGiEBa7MuVQ8=";
         allowedIPs = ["10.11.12.0/24"];
       }
+      {
+        # lanthanum
+        publicKey = "4PPLl1dfvbuwHAJjjBzeDWlM66TKCGYCdzPb+ppphRM=";
+        allowedIPs = ["10.11.12.0/24"];
+      }
     ];
   };
 
