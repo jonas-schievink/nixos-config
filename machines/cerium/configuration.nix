@@ -62,7 +62,7 @@
     ];
   };
 
-  time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/Berlin";
 
   environment.systemPackages = with pkgs; [
     pkgs.termite.terminfo
