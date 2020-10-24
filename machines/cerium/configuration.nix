@@ -55,6 +55,7 @@
   time.timeZone = "Europe/Amsterdam";
 
   environment.systemPackages = with pkgs; [
+    pkgs.termite.terminfo
   ];
 
   # Limit journald disk usage, which is in short supply here. It still uses too much RAM.
