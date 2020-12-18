@@ -2,6 +2,7 @@ okular
 sshfs
 llvmPackages.bintools
 dolphinEmu
+nixos-generators
 ntfsprogs
 gparted
 xsv

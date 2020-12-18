@@ -11,6 +11,7 @@
 
     ../../modules/base.nix
     ../../modules/udev-rules
+    ../../modules/gha-runner.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
