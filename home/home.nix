@@ -195,6 +195,15 @@ in {
         "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio-ctl}/bin/pulseaudio-ctl up 2";
         "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio-ctl}/bin/pulseaudio-ctl down 2";
         "XF86AudioMute" = "exec ${pkgs.pulseaudio-ctl}/bin/pulseaudio-ctl mute";
+
+        # Because this is the clown industry, nobody sees any use in making keybindings
+        # configurable, and Ctrl+Q often ends up being "kill the app", while at the same time being
+        # very close to frequently used shortcuts like Ctrl+W.
+        # Since "kill the app" can already be done by closing the damn window anyways, just kill
+        # this shortcut globally once and for all.
+        # Computers must be absolute hell for disabled people if even I have this much problems with
+        # something this simple.
+        "Ctrl+q" = "nop";
       };
       window.commands = [
         # kill the desktop window containing the wallpaper (i3 tries to tile it)
