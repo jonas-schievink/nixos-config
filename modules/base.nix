@@ -67,7 +67,7 @@
   # Enable touchpad support.
   services.xserver.libinput = {
     enable = true;
-    naturalScrolling = true;  # touchpad
+    touchpad.naturalScrolling = true;
   };
 
   virtualisation.libvirtd = {
