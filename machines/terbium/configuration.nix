@@ -1,5 +1,18 @@
 { config, pkgs, ... }:
 
+let
+  makeGHARunner = { runnerName ? "gha-self-hosted", pakFile, repoUrl, probeSerial }: {
+    image = "myoung34/github-runner:latest";
+    environment = {
+      RUNNER_NAME = runnerName;
+      ACCESS_TOKEN = pkgs.lib.removeSuffix "\n" (builtins.readFile pakFile);
+      REPO_URL = repoUrl;
+    };
+    extraOptions = [
+      "--device=/dev/probe_${probeSerial}"
+    ];
+  };
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -43,6 +56,21 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  ### GitHub Actions runner setup ###
+  # The purpose of the runners is to run hardware-in-the-loop tests that talk to external hardware.
+  # This registers a udev rule that creates unique symlinks to the USB device nodes that incorporate
+  # the USB serial number. For example: `/dev/probe_303233200A434E4B11002C00`
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="da42", SYMLINK+="probe_$attr{serial}"
+  '';
+  # Set up a container per repo to install a runner in.
+  virtualisation.oci-containers.backend = "podman";
+  virtualisation.oci-containers.containers.gha-bxcan = makeGHARunner {
+    pakFile = ./gha-bxcan.key;
+    repoUrl = "https://github.com/jonas-schievink/bxcan-ci";
+    probeSerial = "303233200A434E4B11002C00";
+  };
 
   programs.fish.enable = true;
 
