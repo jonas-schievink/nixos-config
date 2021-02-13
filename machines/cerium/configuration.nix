@@ -74,6 +74,25 @@
     ];
   };
 
+  security.acme.acceptTerms = true;
+  security.acme.email = "jonasschievink+acme@gmail.com";
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  services.nginx = {
+    enable = true;
+    virtualHosts = {
+      "gehorche.computer" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          root = pkgs.buildEnv {
+            name = "webroot-gehorche.computer";
+            paths = [ ./www ];
+          };
+        };
+      };
+    };
+  };
+
   time.timeZone = "Europe/Berlin";
 
   environment.systemPackages = with pkgs; [
