@@ -107,6 +107,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  # Prohibit password auth in general. root has it disabled by default regardless.
+  services.openssh.passwordAuthentication = false;
 
   programs.fish.enable = true;
 
