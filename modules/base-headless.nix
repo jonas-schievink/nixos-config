@@ -43,7 +43,7 @@
     tpm2-tools thunderbolt
 
     # network utils
-    wget curl git gitAndTools.gh subversion
+    wget curl git gitAndTools.gh subversion ethtool
   ];
 
   security.sudo.extraConfig = ''
