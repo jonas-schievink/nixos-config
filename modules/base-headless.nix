@@ -28,8 +28,12 @@
     defaultLocale = "en_US.UTF-8";
   };
 
-  services.avahi.enable = true;
-  services.avahi.nssmdns = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish.enable = true;
+    publish.addresses = true;
+  };
 
   # System-level packages. Mostly contains system management and debugging
   # utils.
