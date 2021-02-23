@@ -7,13 +7,14 @@
   buildEnv,
 
   libudev,
+  libusb,
   jlink,
 }:
 
 let
-  version = "10.5.0";
-  url = "https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-command-line-tools/sw/Versions-10-x-x/nRFCommandLineTools1050Linuxamd64tar.gz";
-  sha256 = "1vyyb6fxfanf72pb06bc442hlk579xrvwcspakdf84zwlhw1sy97";
+  version = "10.12.1";
+  url = "https://www.nordicsemi.com/-/media/Software-and-other-downloads/Desktop-software/nRF-command-line-tools/sw/Versions-10-x-x/10-12-1/nRFCommandLineTools10121Linuxamd64.tar.gz";
+  sha256 = "1141myf8nn464i1iaw79q6xm2a1mdn3hmaygwxpz1dqxcgfmi5dr";
 
   src = fetchurl {
     inherit url sha256;
@@ -21,7 +22,7 @@ let
   };
 
   versionUnderscore = builtins.replaceStrings ["."] ["_"] version;
-  targetFile = "./nRF-Command-Line-Tools_${versionUnderscore}_Linux-amd64.tar.gz";
+  targetFile = "./nRF-Command-Line-Tools_${versionUnderscore}.tar";
   unpackPhase = ''
     set -o errexit
     mkdir src
@@ -52,7 +53,7 @@ let
     name = "nrf-tools-raw-${version}";
     inherit version src unpackPhase;
 
-    buildInputs = [ libudev autoPatchelfHook ];
+    buildInputs = [ libudev libusb autoPatchelfHook ];
 
     installPhase = ''
       set -o errexit
