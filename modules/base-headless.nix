@@ -40,7 +40,7 @@
   # $ nix search <NAME>
   environment.systemPackages = with pkgs; [
     # base utilities
-    utillinux binutils neovim
+    utillinux binutils neovim file
 
     # hardware info and debugging utils
     usbutils pciutils lsof nvme-cli smartmontools hdparm htop powertop
