@@ -67,6 +67,10 @@ let
   };
 in {
 
+  imports = [
+    ./rootless-containers.nix
+  ];
+
   options.services.gha-hil-runners = mkOption {
     type = types.attrsOf (types.submodule runnerOptions);
     default = {};
