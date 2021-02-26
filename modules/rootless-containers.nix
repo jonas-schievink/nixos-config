@@ -218,11 +218,17 @@ let
       };
     };
 
-  mkService = name: container: let
+  #[rootless]
+  mkService = index: name: container: let
     dependsOn = map (x: "${cfg.backend}-${x}.service") container.dependsOn;
+    subUidStart = (index * 100000) + 1500000000;  # 1.5 billion offset from NixOS-assigned IDs
+    # (this is also the start of the subgid range, not just subuid)
   in {
     wantedBy = [] ++ optional (container.autoStart) "multi-user.target";
-    after = lib.optionals (cfg.backend == "docker") [ "docker.service" "docker.socket" ] ++ dependsOn;
+    after = lib.optionals (cfg.backend == "docker") [ "docker.service" "docker.socket" ]
+      #[rootless] added network dependency (podman itself needs that to pull the image)
+      ++ ["network-online.target"]
+      ++ dependsOn;
     requires = dependsOn;
     environment = proxy_env;
 
@@ -250,6 +256,10 @@ let
       ++ optional (container.user != null) "-u ${escapeShellArg container.user}"
       ++ map (v: "-v ${escapeShellArg v}") container.volumes
       ++ optional (container.workdir != null) "-w ${escapeShellArg container.workdir}"
+      #[rootless]
+      ++ [ "--uidmap" "0:${toString subUidStart}:65536" ]
+      ++ [ "--gidmap" "0:${toString subUidStart}:65536" ]
+      #[/rootless]
       ++ map escapeShellArg container.extraOptions
       ++ [container.image]
       ++ map escapeShellArg container.cmd
@@ -259,8 +269,10 @@ let
     postStop = "${cfg.backend} rm -f ${name} || true";
 
     serviceConfig = {
-      StandardOutput = "null";
-      StandardError = "null";
+      #[rootless] commented out because they eat important podman errors! (this does duplicate
+      # container output though)
+      #StandardOutput = "null";
+      #StandardError = "null";
 
       ### There is no generalized way of supporting `reload` for docker
       ### containers. Some containers may respond well to SIGHUP sent to their
@@ -281,23 +293,7 @@ let
       TimeoutStartSec = 0;
       TimeoutStopSec = 120;
       Restart = "always";
-
-      #[rootless]
-      User = "${cfg.backend}-${name}";
     };
-  };
-
-  #[rootless]
-  mkServiceUser = name: container: {
-    # podman requires write access to the home directory, so create one
-    # (should probably not be inside /home though)
-    home = "/home/${cfg.backend}-${name}";
-    createHome = true;
-
-    # this isn't really correct, but it's needed to get automatic subuid/subgid mappings
-    isNormalUser = true;
-
-    extraGroups = container.groups;
   };
 
 in {
@@ -337,12 +333,13 @@ in {
   };
 
   config = lib.mkIf (cfg.containers != {}) (lib.mkMerge [
-    {
-      systemd.services = mapAttrs' (n: v: nameValuePair "${cfg.backend}-${n}" (mkService n v)) cfg.containers;
-
-      #[rootless]
-      users.users = mapAttrs' (n: v: nameValuePair "${cfg.backend}-${n}" (mkServiceUser n v)) cfg.containers;
-    }
+    #[rootless]
+    (let
+      containerList = mapAttrsToList (n: v: nameValuePair n v) cfg.containers;
+      services = imap0 (i: nvp: nameValuePair "${cfg.backend}-${nvp.name}" (mkService i nvp.name nvp.value)) containerList;
+    in {
+      systemd.services = listToAttrs services;
+    })
     (lib.mkIf (cfg.backend == "podman") {
       virtualisation.podman.enable = true;
     })
