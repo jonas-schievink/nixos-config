@@ -16,8 +16,11 @@ let
 
       accessTokenFile = mkOption {
         type = types.path;
-        description = "Path to file containing a Private Access Token.";
-        # FIXME: this is included in plain text in the start script, which is in the Nix store!
+        description = ''
+          Path to file containing `ACCESS_TOKEN=<Private Access Token>`. For security, this is not
+          stored in the Nix store (which is world-readable), but passed directly to the container
+          runtime, so unfortunately it has to start with `ACCESS_TOKEN=`.
+        '';
       };
 
       repoUrl = mkOption {
@@ -82,9 +85,15 @@ in {
       image = "myoung34/github-runner:latest";
       environment = lib.mkMerge [{
         RUNNER_NAME = runner.name;
-        ACCESS_TOKEN = pkgs.lib.removeSuffix "\n" (builtins.readFile runner.accessTokenFile);
         REPO_URL = runner.repoUrl;
       } runner.extraEnv];
+      extraOptions = let
+        expected = "ACCESS_TOKEN=";
+        contents = builtins.readFile runner.accessTokenFile;
+        start = builtins.substring 0 (builtins.stringLength expected) contents;
+      in
+        assert start == expected;
+        [ "--env-file" (toString runner.accessTokenFile) ];
       groups = [ "gha-${name}" ];
       autoStart = runner.autoStart;
     } (lib.mkIf (runner.usbSerial != null) {
