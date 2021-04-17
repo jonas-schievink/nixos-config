@@ -27,12 +27,20 @@
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.ens3.ipv4 = {
-    addresses = [
-      { address = "130.255.76.128"; prefixLength = 24; }
-    ];
+  networking.interfaces.ens3 = {
+    ipv4 = {
+      addresses = [
+        { address = "130.255.76.128"; prefixLength = 24; }
+      ];
+    };
+    ipv6 = {
+      addresses = [
+        { address = "2a02:e00:ffec:881::1"; prefixLength = 48; }
+      ];
+    };
   };
   networking.defaultGateway = "130.255.76.1";
+  networking.defaultGateway6 = "2a02:e00:ffec::1";
   networking.nameservers = [ "9.9.9.9" "8.8.8.8" "8.8.4.4" ];
 
   # VPN setup
