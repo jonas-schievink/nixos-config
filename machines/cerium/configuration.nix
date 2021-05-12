@@ -97,6 +97,9 @@
             paths = [ ./www ];
           };
         };
+        locations."/dist" = {
+          root = "/var/www/gehorche.computer";
+        };
       };
     };
   };
