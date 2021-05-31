@@ -4,7 +4,7 @@ theme = "solarized-dark"
 [[block]]
 block = "battery"
 interval = 10
-format = "{percentage}%"
+format = "{percentage}"
 
 [[block]]
 block = "time"

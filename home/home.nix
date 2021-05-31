@@ -238,7 +238,8 @@ in {
           };
 
           fonts = {
-            names = [ "FontAwesome 9" "Noto Mono for Powerline 9" ];
+            names = [ "FontAwesome" "Noto Mono for Powerline" ];
+            size = 9.0;
           };
 
           statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3/status.toml";
