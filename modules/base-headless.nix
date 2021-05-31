@@ -2,11 +2,13 @@
 # This configures things that should be the same on *all* machines, desktops,
 # laptops, and servers alike.
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Enable exFAT support
-  boot.extraModulePackages = [ config.boot.kernelPackages.exfat-nofuse ];
+  boot.extraModulePackages = lib.mkIf
+    (lib.versionOlder config.boot.kernelPackages.kernel.version "5.8")
+    [ config.boot.kernelPackages.exfat-nofuse ];
 
   # The firewall logging is very verbose in dmesg, tone it down a bit
   networking.firewall.logRefusedConnections = false;
