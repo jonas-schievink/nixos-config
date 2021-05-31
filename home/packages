@@ -16,7 +16,6 @@ wireshark-qt
 iotop
 jq
 linuxPackages.perf
-kicad
 unrar
 bind
 acpilight
@@ -56,7 +55,6 @@ cargo-outdated
 cargo-release
 cargo-watch
 xdg-user-dirs
-jetbrains.idea-community
 openocd-git
 rustup
 gdb
