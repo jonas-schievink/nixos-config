@@ -54,12 +54,14 @@
 
   programs.htop = {
     enable = true;
-    hideUserlandThreads = true;
-    highlightBaseName = true;
-    shadowOtherUsers = true;
-    showProgramPath = false;  # these get too long with Nix :)
-    meters.left = [ "AllCPUs" ];
-    meters.right = [ "Memory" "Swap" "Blank" "Tasks" "LoadAverage" "Battery" "Clock" ];
+    settings = {
+      hide_userland_threads = true;
+      highlight_base_name = true;
+      shadow_other_users = true;
+      show_program_path = false;  # these get too long with Nix :)
+      left_meters = [ "AllCPUs" ];
+      right_meters = [ "Memory" "Swap" "Blank" "Tasks" "LoadAverage" "Battery" "Clock" ];
+    };
   };
 
   # Enable direnv...
