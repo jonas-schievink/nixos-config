@@ -59,8 +59,7 @@
       highlight_base_name = true;
       shadow_other_users = true;
       show_program_path = false;  # these get too long with Nix :)
-      left_meters = [ "AllCPUs" ];
-      right_meters = [ "Memory" "Swap" "Blank" "Tasks" "LoadAverage" "Battery" "Clock" ];
+      show_cpu_frequency = true;
     };
   };
 
