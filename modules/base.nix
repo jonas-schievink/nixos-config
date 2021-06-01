@@ -72,7 +72,7 @@
 
   virtualisation.libvirtd = {
     enable = true;
-    onBoot = "ignore";
-    qemuRunAsRoot = false;
+    onBoot = "ignore";  # don't start any guests on boot
+    qemuRunAsRoot = false;  # use unprivileged qemu user
   };
 }
