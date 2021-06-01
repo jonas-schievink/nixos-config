@@ -61,6 +61,10 @@
   services.fwupd.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
 
+  services.xserver.displayManager.autoLogin = {
+    enable = true;
+    user = "jonas";
+  };
   services.xserver.displayManager.sddm = {
     enable = true;
     autoNumlock = true;
