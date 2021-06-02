@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
 
     ../../modules/base.nix
+    ../../modules/silent.nix
     ../../modules/udev-rules
   ];
 
@@ -19,8 +20,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   # Speed up the boot a little.
   boot.loader.timeout = 1;
-  # Hide stage1/stage2 script messages.
-  boot.initrd.verbose = false;
 
   networking.hostName = "lanthanum";
   networking.networkmanager.enable = true;
