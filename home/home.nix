@@ -33,6 +33,7 @@ in {
   fonts.fontconfig.enable = true;
 
   services.syncthing.enable = true;
+  services.kdeconnect.enable = true;
 
   services.unclutter = {
     enable = true;

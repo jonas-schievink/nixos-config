@@ -18,6 +18,10 @@
     xorg.xwininfo
   ];
 
+  # Allow ports used by KDE Connect
+  networking.firewall.allowedTCPPortRanges = [{ from = 1714; to = 1764; }];
+  networking.firewall.allowedUDPPortRanges = [{ from = 1714; to = 1764; }];
+
   fonts = {
     enableDefaultFonts = false;
 
