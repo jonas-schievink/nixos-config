@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
-{
+let
+  unstableTarball = fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  pkgs-unstable = import unstableTarball {
+    config = config.nixpkgs.config;
+  };
+in {
   imports = [
     ./hardware-configuration.nix
 
@@ -21,6 +26,13 @@
   environment.systemPackages = with pkgs; [
     pkgs.termite.terminfo
   ];
+
+  services.minecraft-server = {
+    enable = true;
+    eula = true;
+    openFirewall = true;
+    package = pkgs-unstable.minecraft-server;  # 1.17
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
